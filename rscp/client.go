@@ -33,7 +33,7 @@ func NewClient(config ClientConfig) (*Client, error) {
 		return nil, err
 	}
 
-	key := createAESKey(config.Key)
+	key := CreateAESKey(config.Key)
 	initIV := NewIV()
 	cipherBlock, _ := rijndael256.NewCipher(key[:]) // implementation does not return an error
 

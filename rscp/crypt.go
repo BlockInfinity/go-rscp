@@ -19,7 +19,7 @@ const keySize = 32
 type Key = [keySize]byte
 
 // CreateAESKey creates a 32-bit key out of a password string
-func createAESKey(key string) [keySize]byte {
+func CreateAESKey(key string) [keySize]byte {
 	aesKey := [32]byte{}
 	copy(aesKey[:], key)
 	copy(aesKey[len(key):], bytes.Repeat([]byte{RSCP_CRYPT_KEY_PADDING}, keySize-len(key)))
