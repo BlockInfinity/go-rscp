@@ -28,3 +28,6 @@ coverage.html
 # binaries
 bin
 /e3dc*
+
+# backup files
+*~
