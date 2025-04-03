@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/BlockInfinity/go-rscp/rscp"
 	"github.com/jnovack/flag"
 	"github.com/sirupsen/logrus"
-	"github.com/spali/go-rscp/rscp"
 )
 
 type config struct {

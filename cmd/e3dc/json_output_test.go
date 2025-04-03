@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/BlockInfinity/go-rscp/rscp"
 	"github.com/go-test/deep"
-	"github.com/spali/go-rscp/rscp"
 )
 
 func TestNewJSONMergedMessages(t *testing.T) {

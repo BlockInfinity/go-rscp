@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/BlockInfinity/go-rscp/rscp"
 	"github.com/go-test/deep"
-	"github.com/spali/go-rscp/rscp"
 )
 
 func Test_unmarshalJSONRequest(t *testing.T) {

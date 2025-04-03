@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/spali/go-rscp/rscp"
+	"github.com/BlockInfinity/go-rscp/rscp"
 )
 
 type JSONMessage map[rscp.Tag]interface{}

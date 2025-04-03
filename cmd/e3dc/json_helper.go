@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 
-	"github.com/spali/go-rscp/rscp"
+	"github.com/BlockInfinity/go-rscp/rscp"
 )
 
 func isJSONEmpty(d []byte) bool {

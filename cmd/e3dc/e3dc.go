@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/BlockInfinity/go-rscp/rscp"
 	"github.com/sirupsen/logrus"
-	"github.com/spali/go-rscp/rscp"
 )
 
 func run() ([]byte, error) {

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/spali/go-rscp/rscp"
+	"github.com/BlockInfinity/go-rscp/rscp"
 )
 
 var (
