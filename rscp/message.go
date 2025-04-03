@@ -60,6 +60,8 @@ func (m *Message) validateResponse() error {
 // must contain a valid tag and data type and the data type must match the value
 func (m *Message) validate() error {
 	if !m.DataType.isValidValue(m.Value) {
+		fmt.Println("m.DataType.newEmpty(0)", m.DataType.newEmpty(0))
+		fmt.Println("m.Value", m.Value)
 		return fmt.Errorf("expected %T got %T : %w", m.DataType.newEmpty(0), m.Value, ErrDataTypeValueMismatch)
 	}
 	if m.valueSize() > RSCP_DATA_MAX_DATA_SIZE {
