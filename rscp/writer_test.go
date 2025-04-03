@@ -106,7 +106,7 @@ func Test_writeFrame(t *testing.T) {
 
 func TestWrite(t *testing.T) {
 	key := createAESKey("testkey")
-	initIV := newIV()
+	initIV := NewIV()
 	cipherBlock, _ := rijndael256.NewCipher(key[:]) // implementation does not return an error
 	tests := []struct {
 		name        string

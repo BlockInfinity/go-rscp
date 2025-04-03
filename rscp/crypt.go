@@ -29,7 +29,7 @@ func createAESKey(key string) [keySize]byte {
 type IV = [RSCP_CRYPT_BLOCK_SIZE]byte
 
 // NewIV returns a new initialized IV
-func newIV() IV {
+func NewIV() IV {
 	var iv IV
 	copy(iv[:], bytes.Repeat([]byte{RSCP_CRYPT_IV_PADDING}, int(RSCP_CRYPT_BLOCK_SIZE))[:RSCP_CRYPT_BLOCK_SIZE])
 	return iv

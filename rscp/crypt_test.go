@@ -45,7 +45,7 @@ func TestNewIV(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := newIV()
+			got := NewIV()
 			if diff := deep.Equal(got, tt.want); diff != nil {
 				t.Errorf("NewIV() = %v, want %v\n%s", got, tt.want, diff)
 			}
