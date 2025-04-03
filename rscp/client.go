@@ -49,7 +49,7 @@ func NewClient(config ClientConfig) (*Client, error) {
 
 // send message
 func (c *Client) send(messages []Message) error {
-	if err := validateRequests(messages); err != nil {
+	if err := ValidateRequests(messages); err != nil {
 		return err
 	}
 	msg, err := Write(&c.encrypter, messages, c.config.UseChecksum.(bool))
