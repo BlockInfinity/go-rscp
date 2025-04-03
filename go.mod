@@ -1,4 +1,4 @@
-module github.com/spali/go-rscp
+module github.com/BlockInfinity/go-rscp
 
 go 1.24.0
 
