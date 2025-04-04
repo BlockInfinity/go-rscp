@@ -115,6 +115,13 @@ func readMessage(buf *bytes.Reader) (*Message, error) {
 		})
 		return nil, fmt.Errorf("length %d does not match expected length of data type %s: %w", l, m.DataType, ErrRscpDataLimitExceeded)
 	}
+
+	// If m.DataType is none, do not attempt to read data.
+	if m.DataType == None && l == 0 {
+		m.Value = nil
+		return m, nil
+	}
+
 	// read data
 	v := m.DataType.newEmpty(l)
 	if v == nil {
