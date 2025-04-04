@@ -117,6 +117,9 @@ func readMessage(buf *bytes.Reader) (*Message, error) {
 	}
 	// read data
 	v := m.DataType.newEmpty(l)
+	if v == nil {
+		return nil, fmt.Errorf("unsupported or unknown DataType %v with length %d; tag is %v", m.DataType, l, m.Tag)
+	}
 	if err := read(buf, v, l); err != nil {
 		return nil, fmt.Errorf("reading message %s: %w", m.Tag, err)
 	}
