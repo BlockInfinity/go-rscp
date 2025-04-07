@@ -13,19 +13,35 @@ import (
 
 // readHeader reads and checks the header
 func readHeader(data []byte) (crcFlag bool, frameSize uint32, dataSize uint16, err error) {
-	if binary.LittleEndian.Uint16(data[RSCP_FRAME_MAGIC_POS:]) != RSCP_MAGIC {
+	const minHeaderLen = 6 // magic (2) + control (2) + length (2)
+	if len(data) < minHeaderLen {
+		fmt.Printf("[DEBUG] readHeader: data too short: len=%d, data=%x\n", len(data), data)
+		return false, 0, 0, ErrRscpInvalidFrameLength
+	}
+
+	magic := binary.LittleEndian.Uint16(data[RSCP_FRAME_MAGIC_POS:])
+	fmt.Printf("[DEBUG] readHeader: expecting magic=0x%04x, got=0x%04x at pos=%d (bytes: %x %x)\n",
+		RSCP_MAGIC, magic, RSCP_FRAME_MAGIC_POS, data[0], data[1])
+
+	if magic != RSCP_MAGIC {
 		return false, 0, 0, ErrRscpInvalidMagic
 	}
+
 	c := binary.LittleEndian.Uint16(data[RSCP_FRAME_CTRL_POS:])
+	fmt.Printf("[DEBUG] readHeader: control flags: 0x%04x\n", c)
+
 	if (c | RSCP_CTRL_BIT_MASK) != RSCP_CTRL_BIT_MASK {
 		return false, 0, 0, ErrRscpInvalidControl
 	}
 	if (c & RSCP_CTRL_BIT_MASK_VERSION) != (uint16(RSCP_VERSION_1_0) << RSCP_FLAG_BIT_VERSION) {
 		return false, 0, 0, ErrRscpProtVersionMismatch
 	}
+
 	crcFlag = (c & RSCP_CTRL_BIT_MASK_CRC) == (uint16(RSCP_CRC_ENABLED) << RSCP_FLAG_BIT_CRC)
 	dataSize = binary.LittleEndian.Uint16(data[RSCP_FRAME_LENGTH_POS:])
 	frameSize = uint32(dataSize + RSCP_FRAME_HEADER_SIZE + (((c & RSCP_CTRL_BIT_MASK_CRC) >> RSCP_FLAG_BIT_CRC) * RSCP_FRAME_CRC_SIZE))
+
+	fmt.Printf("[DEBUG] readHeader: dataSize=%d, frameSize=%d, crcFlag=%v\n", dataSize, frameSize, crcFlag)
 	return crcFlag, frameSize, dataSize, nil
 }
 
